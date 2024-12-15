@@ -1,0 +1,7 @@
+{
+  "name": "CARTAS",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,148 @@
+<ion-content>
+  <!-- Form to Create a New Card -->
+  <div class="create-card-container">
+    <form (submit)="createCard(); $event.preventDefault()">
+      <ion-item>
+        <ion-label position="floating">ID</ion-label>
+        <ion-input
+          [(ngModel)]="newCard.id_Carta"
+          name="id_Carta"
+          type="number"
+          maxlength="2"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label class="player-label">Jugador</ion-label>
+        <ion-checkbox
+          [(ngModel)]="newCard.jugador"
+          name="jugador"
+        ></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Turno</ion-label>
+        <ion-input
+          [(ngModel)]="newCard.id_Turno"
+          maxlength="2"
+          type="number"
+          name="id_Turno"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Numero</ion-label>
+        <ion-input
+          [(ngModel)]="newCard.numero"
+          name="numero"
+          required
+          maxlength="2"
+        >
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Palo</ion-label>
+        <ion-input
+          [(ngModel)]="newCard.palo"
+          name="palo"
+          maxlength="1"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Juego</ion-label>
+        <ion-input
+          [(ngModel)]="newCard.juego"
+          name="juego"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-button
+        expand="full"
+        type="submit"
+        color="primary"
+        [disabled]="!newCard.numero || !newCard.juego"
+      >
+        Create Card
+      </ion-button>
+    </form>
+  </div>
+  <div *ngIf="editCard">
+    <h2>Edit Card</h2>
+    <form (submit)="updateCard(); $event.preventDefault()">
+      <ion-item>
+        <ion-label position="floating">ID</ion-label>
+        <ion-input
+          [(ngModel)]="editCard.id_Carta"
+          maxlength="2"
+          name="edit_id_Carta"
+          disabled
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Jugador</ion-label>
+        <ion-checkbox
+          [(ngModel)]="editCard.jugador"
+          name="edit_jugador"
+        ></ion-checkbox>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Turno</ion-label>
+        <ion-input
+          [(ngModel)]="editCard.id_Turno"
+          name="edit_id_Turno"
+          type="number"
+          maxlength="2"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Numero</ion-label>
+        <ion-input
+          [(ngModel)]="editCard.numero"
+          name="edit_numero"
+          maxlength="2"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Palo</ion-label>
+        <ion-input
+          [(ngModel)]="editCard.palo"
+          name="edit_palo"
+          maxlength="1"
+        ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Juego</ion-label>
+        <ion-input
+          [(ngModel)]="editCard.juego"
+          name="edit_juego"
+          required
+        ></ion-input>
+      </ion-item>
+      <ion-button expand="full" type="submit" color="primary">
+        Save Changes
+      </ion-button>
+      <ion-button expand="full" color="medium" (click)="cancelEdit()">
+        Cancel
+      </ion-button>
+    </form>
+  </div>
+  <!-- List of Cards -->
+  <ion-list>
+    <ion-item *ngFor="let card of cards">
+      <ion-label>
+        <h2>
+          ID: {{ card.id_Carta }} | Jugador: {{ card.jugador }} | Turno: {{
+          card.id_Turno }} | Numero: {{ card.numero }} | Palo: "{{ card.palo }}"
+          | Juego: {{ card.juego }}
+        </h2>
+        <ion-button color="warning" (click)="selectCardForEdit(card)"
+          >Edit</ion-button
+        >
+        <ion-button color="danger" (click)="deleteCard(card.id_Carta)"
+          >Delete</ion-button
+        >
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
